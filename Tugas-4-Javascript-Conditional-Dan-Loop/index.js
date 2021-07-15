@@ -103,7 +103,14 @@ while(init <= loop){
 	}
 	if(init % 3 == 0){
 		console.log(init+' - '+ print );
-		console.log('======');
+		var dash = '';
+		var no = 1;
+		while(no <= init){
+			dash += "=";
+			no++;
+		}
+		console.log(dash);
+
 		// Reset
 		var cetak = 0;
 	}else{
