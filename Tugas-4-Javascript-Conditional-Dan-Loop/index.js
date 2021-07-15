@@ -89,17 +89,29 @@ var kalimat_1 = 'I Love Programming';
 var kalimat_2 = 'I Love Javascript';
 var kalimat_3 = 'I Love Vue Js';
 
+
+
 var init = 1;
-var loop = 7;
+var loop = 100;
+var cetak = 1;
+var print = '';
 while(init <= loop){
+	switch(cetak){
+		  case 1:   { print = kalimat_1; break; }
+		  case 2:   { print = kalimat_2 ; break; }
+		  case 3:   { print = kalimat_3 ; break; }
+	}
 	if(init % 3 == 0){
-		console.log(init+' -');
+		console.log(init+' - '+ print );
 		console.log('======');
+		// Reset
+		var cetak = 0;
 	}else{
-		console.log(init+' -');
+		console.log(init+' - '+ print);
 	}
 	
 	init++;
+	cetak++;
 }
 
 
