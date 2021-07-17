@@ -53,3 +53,19 @@ var tahun = 2020
 var hasil_2 = next_date(tanggal , bulan , tahun ) // output : 1 Januari 2021
 console.log(hasil_2);
 
+console.log('');
+console.log('-- Soal 2 --')
+
+function jumlah_kata(kalimat){
+	var splitKalimat = kalimat.trim().split(' ');
+
+	return splitKalimat.length
+}
+
+var kalimat_1 = " Halo nama saya Muhammad Iqbal Mubarok "
+var kalimat_2 = "Saya Iqbal"
+
+
+console.log(jumlah_kata(kalimat_1)) // 6
+console.log(jumlah_kata(kalimat_2)) // 2
+
