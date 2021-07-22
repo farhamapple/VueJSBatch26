@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas 2</title>
+</head>
+<body>
+  <div id="app">
+    <button onclick="vm.openForm()">Open From</button>
+    <h1>{{ 'Nilai a : ' + hasil }}</h1>
+    <h1>{{ 'Rata-rata : ' + rataRata }}</h1>
+    <h1>{{ 'Jumlah Form : ' + jumlahPopUpMuncul }}</h1>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+ <script type="text/javascript">
+   var vm = new Vue({
+      el: '#app',
+      data: {
+        a: 0,
+        temp: 0, 
+        jumlahPopUp: 0, 
+        rata_rata: 0 
+      },
+      computed : {
+        hasil(){
+         
+         
+          return this.temp
+        },
+        jumlahPopUpMuncul(){
+
+          return this.jumlahPopUp
+        },
+        rataRata(){
+          
+          return this.rata_rata
+        }
+
+      },
+      methods: {
+        openForm : function (number){
+          this.a = prompt("Masukkan Nilai a :")
+          this.temp = parseInt(this.temp) + parseInt(this.a)
+          this.jumlahPopUp = this.jumlahPopUp + 1
+          if(this.temp >= 10){
+            this.rata_rata = this.temp / this.jumlahPopUp
+          }
+        },
+      }
+  }
+   );
+ </script>
+</body>
+</html>
