@@ -43,13 +43,12 @@
                 this.errors.push('Title Minimal 5 Karakter');
                 this.$refs.title.focus()
               
-            }
-            if(this.description.length > 10){
+            }if(this.description.length > 10){
                 this.errors.push('Title Maximal 10 Karakter');
                 this.$refs.description.focus()
             }
 
-            if(this.errors.length === 0){
+            if(this.errora.length === 0){
                 alert('Terima Kasih Anda mengisi Data')
             }
         }
