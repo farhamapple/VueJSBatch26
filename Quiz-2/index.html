@@ -18,17 +18,18 @@
             <h1>Quiz 2</h1>
             <br>
              <div id="app">
-              <form @submit.prevent="addNama()">
+              <form>
                 <div class="form-group">
                   <label for="nama">Masukkan Nama</label>
                   <input type="nama" class="form-control" id="nama" v-model='newNama'>
                 </div>
-                <button type="submit" class="btn btn-primary">{{ namaButton }}</button>
+                <button @click.prevent="addNama" class="btn btn-primary" v-show="!updateSubmit">Submit</button>
+                <button @click.prevent="updateNama" class="btn btn-warning" v-show="updateSubmit">Update</button>
               </form>
               <br>
               <h2>Hasil Inputan</h2>
               <ul class="list-group">
-                <li class="list-group-item" v-for="(user, index) in users">{{ user.nama }} <button type="button" class="btn btn-sm btn-success" v-on:click="editNama(index)">Edit</button> | <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteNama(index)">Delete</button></li>
+                <li class="list-group-item" v-for="(user, index) in users">{{ user.nama }} <button type="button" class="btn btn-sm btn-success" v-on:click="editNama(user, index)">Edit</button> | <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteNama(index)">Delete</button></li>
               </ul>
             </div>
         </div>
@@ -41,12 +42,13 @@
           el: '#app',
           data: {
             newNama : "",
-            namaButton: "Submit",
+            updateSubmit: false,
             users : [
                 {'nama' : 'Farham Harvianto'},
                 {'nama' : 'Evi Lutfiati'},
                 {'nama' : 'Khaizuran Rafif Hamizan'},
             ], 
+            selectedId: '',
           },
           methods: {
             addNama : function(){
@@ -59,14 +61,22 @@
               }
               //console.log(textInput)
             },
-            editNama : function(index){
-                let setNama = this.users[index]['nama'];
+            editNama : function(user, index){
+                let setNama = user.nama;
+                //console.log(this.users)
                 this.newNama = setNama;
-                this.namaButton = "Update";
-                //console.log();
+                this.selectedId = index;
+                this.updateSubmit = true;
             },
             deleteNama : function(index){
                 this.users.splice(index, 1);
+            }, 
+            updateNama: function(){
+              this.users[this.selectedId].nama = this.newNama.trim()
+              this.newNama = ""
+              this.updateSubmit = false;
+              this.selectedId = '';
+
             }
           }
       })

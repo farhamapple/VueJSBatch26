@@ -14,14 +14,14 @@
           text-overflow: ellipsis;
         }
     </style>
-    <title>Tugas 12 Ajax Axios</title>
+    <title>Tugas 13 Vue Component</title>
   </head>
   <body>
     <div class="container" id="app">
         <!-- Content here -->
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center" style="margin-top: 35px; font-weight:bold; color:darkseagreen">Tugas 12 Ajax Axios</h1>
+                <h1 class="text-center" style="margin-top: 35px; font-weight:bold; color:darkseagreen">Tugas 13 Vue Component</h1>
             </div>
         </div>
         <div class="row">
@@ -73,10 +73,22 @@
         </div>
         <br>
         <div class="row" >
-            <div class="col-md-4" v-for="member of members">
+            <members-component v-for="member of members" :member="member" :domain="domain" @upload="uploadPhotoMember(member) = $event" @edit="editMember(member) = $event" @delete="deleteMember(member.id) = $event">
+                
+            </members-component>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+    var MembersComponent = {
+        template : `
+            <div class='col-md-4'>
                 <div class="card">
-                    <img v-bind:src="member.photo_profile ? photoDomain + member.photo_profile : 'https://picsum.photos/50/50'" 
-                    class="card-img-top" alt="...">
+                    <img v-bind:src="member.photo_profile ? domain + member.photo_profile : 'https://picsum.photos/50/50'" 
+                        class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title max title" style="font-size: 12pt;">{{ member.name }}</h5>
                       <p class="card-text">
@@ -88,23 +100,22 @@
                         </dl>
                       </p>
                       <div class="btn-group" role="group"> 
-                        <button v-on:click="uploadPhotoMember(member)" class="btn btn-sm btn-secondary">Upload Foto</button>
-                        <button v-on:click="editMember(member)" class="btn btn-sm btn-success">Edit</button>
-                        <button v-on:click="deleteMember(member.id)" class="btn btn-sm btn-danger">Delete</button>
+                        <button v-on:click="$emit('upload', member)" class="btn btn-sm btn-secondary">Upload Foto</button>
+                        <button v-on:click="$emit('edit', member)" class="btn btn-sm btn-success">Edit</button>
+                        <button v-on:click="$emit('delete', member.id)" class="btn btn-sm btn-danger">Delete</button>
                         
                       </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="text/javascript">
+        `,
+        props : ['member', 'domain']
+    }
     var vm = new Vue({
         el: '#app',
+        components : {
+                        'members-component' : MembersComponent
+        },
         data: {
             buttonStatus: "submit",
             name: "",
@@ -112,7 +123,7 @@
             no_hp: "",
             errors: [],
             members: [],
-            photoDomain: "http://demo-api-vue.sanbercloud.com",
+            domain: "http://demo-api-vue.sanbercloud.com",
             idUpdate: "",
             idUploadPhoto: ""
         },
