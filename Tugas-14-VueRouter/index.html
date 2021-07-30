@@ -96,11 +96,18 @@
             },
             { 
                 path: '/halaman-dua', 
-                component: HalamanDua 
+                component: HalamanDua,
+                meta : {
+                    login: true
+                }
             },
             { 
                 path: '/halaman-tiga', 
-                component: HalamanTiga
+                component: HalamanTiga,
+                meta : {
+                    login: true,
+                    admin : true
+                }
             },
             {
                 path: '*',
@@ -112,6 +119,23 @@
         const router = new VueRouter({
             routes 
         })
+
+        router.beforeEach((to, from, next) => {
+            if(to.matched.some(record => record.meta.login)){
+                
+                let auth = true
+                if(!auth){
+                    alert("Halaman ini hanya untuk user yang sudah Login !")
+                    next(false)
+                }else{
+                    next()
+                    alert("Berhasil Masuk !")
+                }
+               
+            }else {
+                next()
+            }
+        });
 
         //Kemudian kita tambahkan object VueRouter yang kita namakan router ke object Vue
 
